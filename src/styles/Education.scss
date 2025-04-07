@@ -1,0 +1,44 @@
+.education {
+    margin-bottom: 2rem;
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        div {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                margin-bottom: .5rem;
+            }
+
+            input {
+                padding: .5rem;
+                font-size: 16px;
+            }
+        }
+
+        button {
+            align-self: flex-start;
+            padding: 5px 10px;
+            margin-top: 10px;
+        }
+    }
+
+    .education-display {
+        p {
+            margin: 5px 0;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin-top: 10px;
+        }
+    }
+}

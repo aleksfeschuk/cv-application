@@ -1,7 +1,6 @@
 import GeneralInfo from './components/GeneralInfo.jsx';
 import Education from './components/Education.jsx';
-import Experience from './components/Experience.jsx';
-import CVDisplay from './components/CVDisplay.jsx';
+import './styles/App.scss';
 
 function App() {
   return (
@@ -9,8 +8,8 @@ function App() {
       <h1>CV Application</h1>
       <GeneralInfo />
       <Education />
-      <Experience />
-      <CVDisplay />
+      {/* <Experience />
+      <CVDisplay /> */}
     </div>
   );
 }
