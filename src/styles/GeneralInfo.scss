@@ -1,0 +1,43 @@
+.general-info {
+    margin-bottom: 2rem;
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        div {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                margin-bottom: 5px;
+            }
+
+            input {
+                padding: .5rem;
+                font-size: 16px;
+            }
+        }
+
+        button {
+            align-self: flex-start;
+            padding: 5px 10px;
+            margin-top: 1rem;
+        }
+    }
+    .info-display {
+        p {
+            margin: 5px 0;
+        }
+    
+        button {
+            padding: 5px 10px;
+            margin-top: 1rem;
+        }
+    }
+}
