@@ -9,6 +9,13 @@ function Experience({ onSubmit, initialData }) {
         dateFrom: '',
         dateTo: '',
     });
+    const [errors, setErrors] = useState({ 
+        company: '', 
+        position: '', 
+        responsibilities: '',
+        dateFrom: '',
+        dateTo: ''
+    });
 
     useEffect(() => {
         if(initialData) {
@@ -19,18 +26,50 @@ function Experience({ onSubmit, initialData }) {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setExperience((prev) => ({ ...prev, [name]: value }));
+        setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
+    };
+
+    const validateForm = () => {
+        const newErrors = { 
+            company: '', 
+            position: '', 
+            responsibilities: '',
+            dateFrom: '',
+            dateTo: ''
+        };
+        let isValid = true;
+
+        if(!experience.company.trim()) {
+            newErrors.company = 'Company name is required';
+            isValid = false;
+        }
+        if (!experience.position.trim()) {
+            newErrors.position = 'Position title is required';
+            isValid = false;
+        }
+        if (!experience.responsibilities.trim()) {
+            newErrors.responsibilities = 'Responsibilities are required';
+            isValid = false;
+        }
+        if (!experience.dateFrom.trim()) {
+            newErrors.dateFrom = 'Start date is required';
+            isValid = false;
+        }
+        if (!experience.dateTo.trim()) {
+            newErrors.dateTo = 'End date is required';
+            isValid = false;
+        }
+
+        setErrors(newErrors);
+        return isValid;
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(experience);
-        // setExperience({
-        //     company: '',
-        //     position: '',
-        //     responsibilities: '',
-        //     dateFrom: '',
-        //     dateTo: '',
-        // });
+        if (validateForm()) {
+            onSubmit(experience);
+        }
+        
     };
 
     return(
@@ -46,6 +85,7 @@ function Experience({ onSubmit, initialData }) {
                         onChange={handleChange}
                         placeholder="Enter company name"
                     />
+                    {errors.company && <span className="error">{errors.company}</span>}
                 </div>
                 <div>
                     <label>Position Title:</label>
@@ -56,6 +96,7 @@ function Experience({ onSubmit, initialData }) {
                         onChange={handleChange}
                         placeholder="Enter company title"
                     />
+                    {errors.position && <span className="error">{errors.position}</span>}
                 </div>
                 <div>
                     <label>Main Responsibilities:</label>
@@ -65,6 +106,7 @@ function Experience({ onSubmit, initialData }) {
                         onChange={handleChange}
                         placeholder="Enter main resposibilities"
                     />
+                    {errors.responsibilities && <span className="error">{errors.responsibilities}</span>}
                 </div>
                 <div>
                     <label>Date From:</label>
@@ -74,7 +116,7 @@ function Experience({ onSubmit, initialData }) {
                         value={experience.dateFrom}
                         onChange={handleChange}
                         placeholder="Enter start date (e.g., 2025-01)"
-                    />
+                    />{errors.dateFrom && <span className="error">{errors.dateFrom}</span>}
                 </div>
                 <div>
                     <label>Date To:</label>
@@ -85,6 +127,7 @@ function Experience({ onSubmit, initialData }) {
                         onChange={handleChange}
                         placeholder="Enter end date(e.g., 2025-01)"
                     />
+                    {errors.dateTo && <span className="error">{errors.dateTo}</span>}
                 </div>
                 <button type="submit">Submit</button>
             </form>

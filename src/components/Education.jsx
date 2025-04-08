@@ -7,6 +7,7 @@ function Education({ onSubmit, initialData }) {
         study: '',
         date: '',
     });
+    const [errors, setErrors] = useState({ school: '', study: '', date: ''});
 
     useEffect(() => {
         if(initialData) {
@@ -17,11 +18,36 @@ function Education({ onSubmit, initialData }) {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setEducation((prev) => ({ ...prev, [name]: value}));
+        setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
     };
+
+    const validateForm = () => {
+        const newErrors = { school: '', study: '', date: ''};
+        let isValid = true;
+
+        if(!education.school.trim()) {
+            newErrors.school = 'School name is required';
+            isValid = false;
+        }
+        if (!education.study.trim()) {
+            newErrors.study = 'Title of study is required';
+            isValid = false;
+        }
+        if (!education.date.trim()) {
+            newErrors.date = 'Date of study is required';
+            isValid = false;
+        }
+
+        setErrors(newErrors);
+        return isValid;
+    }
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(education);
+        if (validateForm()) {
+            onSubmit(education);
+        }
     };
 
 
@@ -38,6 +64,7 @@ function Education({ onSubmit, initialData }) {
                         onChange={handleChange}
                         placeholder="Enter school name"
                     />
+                    {errors.school && <span className="error">{errors.school}</span>}
                 </div>
                 <div>
                     <label>Title of Study:</label>
@@ -48,6 +75,7 @@ function Education({ onSubmit, initialData }) {
                         onChange={handleChange}
                         placeholder="Enter title of study"
                     />
+                    {errors.study && <span className="error">{errors.study}</span>}
                 </div>
                 <div>
                     <label>Date of Study:</label>
@@ -58,6 +86,7 @@ function Education({ onSubmit, initialData }) {
                         onChange={handleChange}
                         placeholder="Enter date (e.g., 2018-2025)"
                     />
+                    {errors.date && <span className="error">{errors.date}</span>}
                     <button type="submit">Submit</button>
                 </div>
             </form>
