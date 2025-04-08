@@ -1,0 +1,50 @@
+.experience {
+    margin-bottom: 2rem;
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        div {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                margin-bottom: .5rem;
+            }
+
+            input,
+            textarea {
+                padding: .5rem;
+                font-size: 16px;
+            }
+
+            textarea {
+                resize: vertical;
+                min-height: 10rem;
+            }
+        }
+
+        button {
+            align-self: flex-start;
+            padding: 5px 10px;
+            margin-top: 1rem;
+        }
+    }
+
+    .experience-display {
+        p {
+            margin: 5px 0;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin-top: 1rem;
+        }
+    }
+}
