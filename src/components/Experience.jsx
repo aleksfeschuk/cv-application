@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import '../styles/Experience.scss';
 
-function Experience({ onSubmit }) {
+function Experience({ onSubmit, initialData }) {
     const [experience, setExperience] = useState({
         company: '',
         position: '',
@@ -9,6 +9,12 @@ function Experience({ onSubmit }) {
         dateFrom: '',
         dateTo: '',
     });
+
+    useEffect(() => {
+        if(initialData) {
+            setExperience(initialData);
+        }
+    }, [initialData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -18,13 +24,13 @@ function Experience({ onSubmit }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(experience);
-        setExperience({
-            company: '',
-            position: '',
-            responsibilities: '',
-            dateFrom: '',
-            dateTo: '',
-        });
+        // setExperience({
+        //     company: '',
+        //     position: '',
+        //     responsibilities: '',
+        //     dateFrom: '',
+        //     dateTo: '',
+        // });
     };
 
     return(

@@ -1,6 +1,6 @@
 import '../styles/CVDisplay.scss';
 
-function CVDisplay({ generalInfo, education, experience }) {
+function CVDisplay({ generalInfo, education, experience, onEdit }) {
     return (
         <div className="cv-display">
             <h2>Your CV</h2>
@@ -10,6 +10,7 @@ function CVDisplay({ generalInfo, education, experience }) {
                     <p>Name: {generalInfo.name}</p>
                     <p>Email: {generalInfo.email}</p>
                     <p>Phone: {generalInfo.phone}</p>
+                    <button onClick={() => onEdit('general')}>Edit</button>
                 </div>
             )}
             {education && (
@@ -18,6 +19,7 @@ function CVDisplay({ generalInfo, education, experience }) {
                     <p>School: {education.school}</p>
                     <p>Title of Study: {education.study}</p>
                     <p>Date: {education.date}</p>
+                    <button onClick={() => onEdit('education')}>Edit</button>
                 </div>
             )}
             {experience && (
@@ -27,6 +29,7 @@ function CVDisplay({ generalInfo, education, experience }) {
                     <p>Position: {experience.position}</p>
                     <p>Responsibilities: {experience.responsibilities}</p>
                     <p>From: {experience.dateFrom} To: {experience.dateTo}</p>
+                    <button onClick={() => onEdit('experience')}>Edit</button>
                 </div>
             )}
             {!generalInfo && !education && !experience && (

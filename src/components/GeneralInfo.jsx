@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import '../styles/GeneralInfo.scss';
 
-function GeneralInfo({ onSubmit }) {
+function GeneralInfo({ onSubmit, initialData }) {
     const [info, setInfo] = useState({ name: '', email: '', phone: '' });
+
+    useEffect(() => {
+        if(initialData) {
+            setInfo(initialData);
+        }
+    }, [initialData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -12,7 +18,7 @@ function GeneralInfo({ onSubmit }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(info);
-        setInfo({ name: '', email: '', phone: ''});
+        // setInfo({ name: '', email: '', phone: ''});
     };
 
 
@@ -27,7 +33,7 @@ function GeneralInfo({ onSubmit }) {
                         name="name"
                         value={info.name}
                         onChange={handleChange}
-                        placeholder="Enter your name"
+                        placeholder="Enter your Full name"
                     />
                 </div>
                 <div>

@@ -10,28 +10,53 @@ function App() {
   const [education, setEducation] = useState(null);
   const [experience, setExperience] = useState(null);
 
+  const [editingSection, setEditingSection] = useState(null);
+
   const handleGeneralInfoSubmit = (data) => {
     setGeneralInfo(data);
+    setEditingSection(null);
   };
 
   const handleEducationSubmit = (data) => {
     setEducation(data);
+    setEditingSection(null);
   };
 
   const handleExperienceSubmit = (data) => {
     setExperience(data);
+    setEditingSection(null);
   };
+
+  const handleEditSection = (section) => {
+    setEditingSection(section);
+  }
 
   return (
     <div className="app-container">
       <h1>CV Application</h1>
-      <GeneralInfo onSubmit={handleGeneralInfoSubmit}/>
-      <Education onSubmit={handleEducationSubmit}/>
-      <Experience onSubmit={handleExperienceSubmit}/>
+      {(!generalInfo || editingSection === 'general') && (
+        <GeneralInfo 
+          onSubmit={handleGeneralInfoSubmit}
+          initialData={generalInfo}
+        />
+      )}
+      {(!education || editingSection === 'education') && (
+        <Education 
+          onSubmit={handleEducationSubmit}
+          initialData={education}
+        />
+      )}
+      {(!experience || editingSection === 'experience') && (
+        <Experience 
+          onSubmit={handleExperienceSubmit}
+          initialData={experience}
+        />
+      )}
       <CVDisplay
         generalInfo={generalInfo}
         education={education}
         experience={experience}
+        onEdit={handleEditSection}
       />
     </div>
   );

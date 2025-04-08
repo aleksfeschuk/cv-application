@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import '../styles/Education.scss';
 
-function Education({ onSubmit }) {
+function Education({ onSubmit, initialData }) {
     const [education, setEducation] = useState({
         school: '',
         study: '',
         date: '',
     });
+
+    useEffect(() => {
+        if(initialData) {
+            setEducation(initialData)
+        }
+    }, [initialData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -16,7 +22,6 @@ function Education({ onSubmit }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(education);
-        setEducation({ school: '', study: '', date: ''});
     };
 
 
