@@ -79,11 +79,15 @@ function Experience({ onSubmit, initialData, isEditing, onAdd }) {
         }
     };
 
+    const handleAddClick = () => {
+        onAdd();
+    }
+
     return(
         <div className="experience">
             <h2>Practical Experience</h2>
             {!isEditing ? (
-                <button className="add-button" onClick={onAdd}>
+                <button className="add-button" onClick={handleAddClick}>
                     Add Experience
                 </button>
             ) : (
@@ -116,9 +120,11 @@ function Experience({ onSubmit, initialData, isEditing, onAdd }) {
                         name="responsibilities" 
                         value={experience.responsibilities}
                         onChange={handleChange}
-                        placeholder="Enter main resposibilities"
+                        placeholder="Enter main responsibilities"
                     />
-                    {errors.responsibilities && <span className="error">{errors.responsibilities}</span>}
+                    {errors.responsibilities && (
+                        <span className="error">{errors.responsibilities}</span>
+                    )}
                 </div>
                 <div>
                     <label>Date From:</label>

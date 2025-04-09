@@ -9,6 +9,22 @@
         text-align: center;
     }
 
+    .download-button {
+        display: block;
+        margin: 0 auto 20px;
+        padding: 8px 16px;
+        background-color: #17a2b8;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 16px;
+
+        &:hover {
+            background-color: #138496;
+        }
+    }
+
     .cv-section {
         margin-bottom: 2rem;
 
