@@ -53,6 +53,12 @@ function Education({ onSubmit, initialData, isEditing, onAdd }) {
     };
 
 
+    const handleCancel = () => {
+        setEducation({ school: '', study: '', date: ''});
+        setErrors({ school: '', study: '', date: ''});
+        onAdd();
+    }
+
     return (
         <div className="education">
             <h2>Educational Experience</h2>
@@ -94,7 +100,12 @@ function Education({ onSubmit, initialData, isEditing, onAdd }) {
                             placeholder="Enter date (e.g., 2018-2025)"
                         />
                         {errors.date && <span className="error">{errors.date}</span>}
+                    </div>
+                    <div className="button-group">
                         <button type="submit">Submit</button>
+                        <button type="button" className="cancel-button" onClick={handleCancel}>
+                            Cancel
+                        </button>
                     </div>
                 </form>
             )}

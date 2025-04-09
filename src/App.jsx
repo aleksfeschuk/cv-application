@@ -54,6 +54,16 @@ function App() {
     setEditingIndex(index);
   }
 
+  const handleDelete = (section, index) => {
+    if (section === 'education') {
+      setEducation((prev) => prev.filter((_, i) => i !== index));
+    } else if (section === 'experience') {
+      setExperience((prev) => prev.filter((_, i) => i !== index));
+    }
+  };
+
+
+
   return (
     <div className="app-container">
       <h1>CV Application</h1>
@@ -91,6 +101,7 @@ function App() {
         education={education}
         experience={experience}
         onEdit={handleEditSection}
+        onDelete={handleDelete}
       />
     </div>
   );

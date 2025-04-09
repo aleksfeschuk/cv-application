@@ -79,7 +79,21 @@ function Experience({ onSubmit, initialData, isEditing, onAdd }) {
         }
     };
 
-    const handleAddClick = () => {
+    const handleCancel = () => {
+        setExperience({
+            company: '',
+            position: '',
+            responsibilities: '',
+            dateFrom: '',
+            dateTo: '',
+        });
+        setErrors({
+            company: '',
+            position: '',
+            responsibilities: '',
+            dateFrom: '',
+            dateTo: '',
+        });
         onAdd();
     }
 
@@ -87,7 +101,7 @@ function Experience({ onSubmit, initialData, isEditing, onAdd }) {
         <div className="experience">
             <h2>Practical Experience</h2>
             {!isEditing ? (
-                <button className="add-button" onClick={handleAddClick}>
+                <button className="add-button" onClick={onAdd}>
                     Add Experience
                 </button>
             ) : (
@@ -147,7 +161,12 @@ function Experience({ onSubmit, initialData, isEditing, onAdd }) {
                     />
                     {errors.dateTo && <span className="error">{errors.dateTo}</span>}
                 </div>
-                <button type="submit">Submit</button>
+                <div className="button-group">
+                    <button type="submit">Submit</button>
+                    <button type="button" className="cancel-button" onClick={handleCancel}>
+                        Cancel
+                    </button>
+                </div>
             </form>
             )}
         </div>

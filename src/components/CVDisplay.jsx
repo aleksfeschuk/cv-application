@@ -1,7 +1,7 @@
 import { jsPDF } from 'jspdf';
 import '../styles/CVDisplay.scss';
 
-function CVDisplay({ generalInfo, education, experience, onEdit }) {
+function CVDisplay({ generalInfo, education, experience, onEdit, onDelete }) {
    const generatePDF = () => {
     const doc = new jsPDF();
     let yPosition = 20;
@@ -120,7 +120,15 @@ function CVDisplay({ generalInfo, education, experience, onEdit }) {
                         <p>School: {edu.school}</p>
                         <p>Title of Study: {edu.study}</p>
                         <p>Date: {edu.date}</p>
-                        <button onClick={() => onEdit('education', index)}>Edit</button>
+                        <div className="button-group">
+                            <button onClick={() => onEdit('education', index)}>Edit</button>
+                            <button 
+                                className='delete-button'
+                                onClick={() => onDelete('education', index)}
+                                >
+                                    Delete
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>
@@ -134,7 +142,15 @@ function CVDisplay({ generalInfo, education, experience, onEdit }) {
                         <p>Position: {exp.position}</p>
                         <p>Responsibilities: {exp.responsibilities}</p>
                         <p>From: {exp.dateFrom} To: {exp.dateTo}</p>
-                        <button onClick={() => onEdit('experience', index)}>Edit</button>
+                        <div className="button-group">
+                            <button onClick={() => onEdit('experience', index)}>Edit</button>
+                            <button 
+                                className='delete-button'
+                                onClick={() => onDelete('experience', index)}
+                            >
+                                Delete
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>
