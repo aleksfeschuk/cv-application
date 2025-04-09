@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import '../styles/Experience.scss';
 
-function Experience({ onSubmit, initialData }) {
+function Experience({ onSubmit, initialData, isEditing, onAdd }) {
     const [experience, setExperience] = useState({
         company: '',
         position: '',
@@ -20,6 +20,14 @@ function Experience({ onSubmit, initialData }) {
     useEffect(() => {
         if(initialData) {
             setExperience(initialData);
+        } else {
+            setExperience({
+                company: '',
+                position: '',
+                responsibilities: '',
+                dateFrom: '',
+                dateTo: '',
+            });
         }
     }, [initialData]);
 
@@ -35,7 +43,7 @@ function Experience({ onSubmit, initialData }) {
             position: '', 
             responsibilities: '',
             dateFrom: '',
-            dateTo: ''
+            dateTo: '',
         };
         let isValid = true;
 
@@ -69,13 +77,17 @@ function Experience({ onSubmit, initialData }) {
         if (validateForm()) {
             onSubmit(experience);
         }
-        
     };
 
     return(
         <div className="experience">
             <h2>Practical Experience</h2>
-            <form onSubmit={handleSubmit}>
+            {!isEditing ? (
+                <button className="add-button" onClick={onAdd}>
+                    Add Experience
+                </button>
+            ) : (
+                <form onSubmit={handleSubmit}>
                 <div>
                     <label>Company Name:</label>
                     <input 
@@ -131,6 +143,7 @@ function Experience({ onSubmit, initialData }) {
                 </div>
                 <button type="submit">Submit</button>
             </form>
+            )}
         </div>
     );
 }

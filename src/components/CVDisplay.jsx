@@ -13,26 +13,34 @@ function CVDisplay({ generalInfo, education, experience, onEdit }) {
                     <button onClick={() => onEdit('general')}>Edit</button>
                 </div>
             )}
-            {education && (
+            {education.length > 0 && (
                 <div className="cv-section">
                     <h3>Education</h3>
-                    <p>School: {education.school}</p>
-                    <p>Title of Study: {education.study}</p>
-                    <p>Date: {education.date}</p>
-                    <button onClick={() => onEdit('education')}>Edit</button>
+                    {education.map((edu, index) => (
+                        <div key={index} className="cv-entry">
+                            <p>School: {edu.school}</p>
+                            <p>Title of Study: {edu.study}</p>
+                            <p>Date: {edu.date}</p>
+                            <button onClick={() => onEdit('education', index)}>Edit</button>
+                        </div>
+                    ))}
                 </div>
             )}
-            {experience && (
+            {experience.length > 0 && (
                 <div className="cv-section">
                     <h3>Experience</h3>
-                    <p>Company: {experience.company}</p>
-                    <p>Position: {experience.position}</p>
-                    <p>Responsibilities: {experience.responsibilities}</p>
-                    <p>From: {experience.dateFrom} To: {experience.dateTo}</p>
-                    <button onClick={() => onEdit('experience')}>Edit</button>
+                    {experience.map((exp, index) => (
+                        <div key={index} className='cv-entry'>
+                            <p>Company: {exp.company}</p>
+                            <p>Position: {exp.position}</p>
+                            <p>Responsibilities: {exp.responsibilities}</p>
+                            <p>From: {exp.dateFrom} To: {exp.dateTo}</p>
+                            <button onClick={() => onEdit('experience', index)}>Edit</button>
+                        </div>
+                    ))}
                 </div>
             )}
-            {!generalInfo && !education && !experience && (
+            {!generalInfo && education.length === 0 && experience.length === 0 && (
                 <p>No data to display. Please fill out the sections above</p>
             )}
         </div>

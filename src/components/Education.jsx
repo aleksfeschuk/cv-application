@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import '../styles/Education.scss';
 
-function Education({ onSubmit, initialData }) {
+function Education({ onSubmit, initialData, isEditing, onAdd }) {
     const [education, setEducation] = useState({
         school: '',
         study: '',
@@ -10,8 +10,10 @@ function Education({ onSubmit, initialData }) {
     const [errors, setErrors] = useState({ school: '', study: '', date: ''});
 
     useEffect(() => {
-        if(initialData) {
+        if (initialData) {
             setEducation(initialData)
+        } else {
+            setEducation({school: '', study: '', date: ''});
         }
     }, [initialData]);
 
@@ -54,42 +56,48 @@ function Education({ onSubmit, initialData }) {
     return (
         <div className="education">
             <h2>Educational Experience</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>School Name:</label>
-                    <input 
-                        type="text" 
-                        name="school"
-                        value={education.school}
-                        onChange={handleChange}
-                        placeholder="Enter school name"
-                    />
-                    {errors.school && <span className="error">{errors.school}</span>}
-                </div>
-                <div>
-                    <label>Title of Study:</label>
-                    <input 
-                        type="text" 
-                        name="study"
-                        value={education.study}
-                        onChange={handleChange}
-                        placeholder="Enter title of study"
-                    />
-                    {errors.study && <span className="error">{errors.study}</span>}
-                </div>
-                <div>
-                    <label>Date of Study:</label>
-                    <input 
-                        type="text" 
-                        name="date"
-                        value={education.date}
-                        onChange={handleChange}
-                        placeholder="Enter date (e.g., 2018-2025)"
-                    />
-                    {errors.date && <span className="error">{errors.date}</span>}
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
+            {!isEditing ? (
+                <button className="add-button" onClick={onAdd}>
+                    Add Education
+                </button>
+            ) : (
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label>School Name:</label>
+                        <input 
+                            type="text" 
+                            name="school"
+                            value={education.school}
+                            onChange={handleChange}
+                            placeholder="Enter school name"
+                        />
+                        {errors.school && <span className="error">{errors.school}</span>}
+                    </div>
+                    <div>
+                        <label>Title of Study:</label>
+                        <input 
+                            type="text" 
+                            name="study"
+                            value={education.study}
+                            onChange={handleChange}
+                            placeholder="Enter title of study"
+                        />
+                        {errors.study && <span className="error">{errors.study}</span>}
+                    </div>
+                    <div>
+                        <label>Date of Study:</label>
+                        <input 
+                            type="text" 
+                            name="date"
+                            value={education.date}
+                            onChange={handleChange}
+                            placeholder="Enter date (e.g., 2018-2025)"
+                        />
+                        {errors.date && <span className="error">{errors.date}</span>}
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            )}
         </div>
     );
 }
