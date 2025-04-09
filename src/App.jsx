@@ -7,6 +7,7 @@ import './styles/App.scss';
 
 function App() {
   const [generalInfo, setGeneralInfo] = useState(null);
+  const [tempGeneralInfo, setTempGeneralInfo] = useState(null);
   const [education, setEducation] = useState([]);
   const [experience, setExperience] = useState([]);
   const [editingSection, setEditingSection] = useState(null);
@@ -16,6 +17,10 @@ function App() {
     setGeneralInfo(data);
     setEditingSection(null);
   };
+
+  const handleGeneralInfoChange = (data) => {
+    setTempGeneralInfo(data);
+  }
 
   const handleEducationSubmit = (data) => {
     if (editingIndex !== null) {
@@ -43,6 +48,7 @@ function App() {
 
   const handleClear = () => {
     setGeneralInfo(null);
+    setTempGeneralInfo(null);
     setEducation([]);
     setExperience([]);
     setEditingSection(null);
@@ -77,6 +83,7 @@ function App() {
           {(!generalInfo || editingSection === 'general') && (
             <GeneralInfo 
               onSubmit={handleGeneralInfoSubmit}
+              onChange={handleGeneralInfoChange}
               initialData={generalInfo}
             />
           )}
@@ -103,7 +110,7 @@ function App() {
         </div>
         <div className="right-column">
             <CVDisplay
-              generalInfo={generalInfo}
+              generalInfo={generalInfo || tempGeneralInfo}
               education={education}
               experience={experience}
               onEdit={handleEditSection}

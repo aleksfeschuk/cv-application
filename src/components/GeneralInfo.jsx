@@ -1,19 +1,23 @@
 import { useState, useEffect } from "react";
 import '../styles/GeneralInfo.scss';
 
-function GeneralInfo({ onSubmit, initialData }) {
-    const [info, setInfo] = useState({ name: '', email: '', phone: '' });
+function GeneralInfo({ onSubmit, onChange, initialData }) {
+    const [generalInfo, setGeneralInfo] = useState({ name: '', email: '', phone: '' });
     const [errors, setErrors] = useState({ name: '', email: '', phone: ''});
 
     useEffect(() => {
         if(initialData) {
-            setInfo(initialData);
+            setGeneralInfo(initialData);
         }
     }, [initialData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
+        setGeneralInfo((prev) => {
+            const updatedInfo = { ...prev, [name]: value};
+            onChange(updatedInfo);
+            return updatedInfo;
+        });
         setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
     };
 
@@ -21,18 +25,18 @@ function GeneralInfo({ onSubmit, initialData }) {
         const newErrors = { name: '', email: '', phone: ''};
         let isValid = true;
 
-        if(!info.name.trim()) {
+        if(!generalInfo.name.trim()) {
             newErrors.name = 'Name is required';
             isValid = false;
         }
-        if (!info.email.trim()) {
+        if (!generalInfo.email.trim()) {
             newErrors.email = 'Email is required';
             isValid = false;
-        } else if (!/\S+@\S+\.\S+/.test(info.email)) {
+        } else if (!/\S+@\S+\.\S+/.test(generalInfo.email)) {
             newErrors.email = 'Email is invalid';
             isValid = false;
         }
-        if (!info.phone.trim()) {
+        if (!generalInfo.phone.trim()) {
             newErrors.phone = 'Phone is required';
             isValid = false;
         }
@@ -44,7 +48,7 @@ function GeneralInfo({ onSubmit, initialData }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
-            onSubmit(info);
+            onSubmit(generalInfo);
         }
     };
 
@@ -58,7 +62,7 @@ function GeneralInfo({ onSubmit, initialData }) {
                     <input 
                         type="text"
                         name="name"
-                        value={info.name}
+                        value={generalInfo.name}
                         onChange={handleChange}
                         placeholder="Enter your Full name"
                     />
@@ -69,7 +73,7 @@ function GeneralInfo({ onSubmit, initialData }) {
                     <input 
                         type="email" 
                         name="email"
-                        value={info.email}
+                        value={generalInfo.email}
                         onChange={handleChange}
                         placeholder="Enter your email"
                     />
@@ -80,7 +84,7 @@ function GeneralInfo({ onSubmit, initialData }) {
                     <input 
                         type="tel" 
                         name="phone"
-                        value={info.phone}
+                        value={generalInfo.phone}
                         onChange={handleChange}
                         placeholder="Enter your phone"
                     />
