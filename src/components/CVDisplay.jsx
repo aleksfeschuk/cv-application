@@ -6,33 +6,81 @@ function CVDisplay({ generalInfo, education, experience, onEdit }) {
     const doc = new jsPDF();
     let yPosition = 20;
 
-    doc.setFontSize(18);
+    doc.setFont('Helvetica', 'bold');
+    doc.setFontSize(20);
+    doc.setTextColor(44, 62, 80);
     doc.text('Curriculum Vitae', 105, yPosition, { align: 'center' });
+    yPosition += 10;
+
+    doc.setLineWidth(0.5);
+    doc.setDrawColor(52, 152, 219);
+    doc.line(20, yPosition, 190, yPosition);
     yPosition += 15;
 
     if (generalInfo) {
+        doc.setFont('Helvetica', 'bold')
         doc.setFontSize(14);
+        doc.setTextColor(44, 62, 80);
         doc.text('General Information', 20, yPosition);
-        yPosition += 10;
+        yPosition += 8;
+
+        doc.setFont('Helvetica', 'normal');
         doc.setFontSize(12);
-        doc.text(`Name: ${generalInfo.email}`, 20, yPosition);
-        yPosition += 7;
+        doc.setTextColor(51, 51, 51);
+        doc.text(`Name: ${generalInfo.name}`, 20, yPosition);
+        yPosition += 6;
         doc.text(`Email: ${generalInfo.email}`, 20, yPosition);
-        yPosition += 7;
+        yPosition += 6;
         doc.text(`Phone: ${generalInfo.phone}`, 20, yPosition);
         yPosition += 15;
     }
 
-    if (experience.length > 0) {
+    if (education.length > 0) {
+        doc.setFont('Helvetica', 'bold');
         doc.setFontSize(14);
-        doc.text('Experience', 20, yPosition);
-        yPosition += 10;
-        experience.forEach((exp, index) => {
+        doc.setTextColor(44, 62, 80);
+        doc.setTextColor(44, 62, 80);
+        doc.text('Education', 20, yPosition);
+        yPosition += 8;    
+    
+        education.forEach((edu, index) => {
+            doc.setFont('Helvetica', 'bold');
             doc.setFontSize(12);
+            doc.setTextColor(52, 152, 219);
+            doc.text(`Education #${index + 1}`, 20, yPosition);
+            yPosition += 6;
+
+            doc.setFont('Helvetica', 'normal');
+            doc.setFontSize(12);
+            doc.setFontSize(51, 51, 51);
+            doc.text(`School: ${edu.school}`, 20, yPosition);
+            yPosition += 6;
+            doc.text(`Title of study: ${edu.study}`, 20, yPosition);
+            yPosition += 6;
+            doc.text(`Date: ${edu.date}`, 20, yPosition);
+            yPosition += 15;
+        })
+    }
+
+    if (experience.length > 0) {
+        doc.setFont('Helvetica', 'bold');
+        doc.setFontSize(14);
+        doc.setTextColor(44, 62, 80);
+        doc.text('Experience', 20, yPosition);
+        yPosition += 8;
+
+        experience.forEach((exp, index) => {
+            doc.setFont('Helvetica', 'bold');
+            doc.setFontSize(12);
+            doc.setTextColor(52, 152, 219);
             doc.text(`Experience #${index + 1}`, 20, yPosition);
-            yPosition += 7;
+            yPosition += 6;
+
+            doc.setFont('Helvetica', 'bold');
+            doc.setFontSize(12);
+            doc.setTextColor(51, 51, 51);
             doc.text(`Company: ${exp.company}`, 20, yPosition);
-            yPosition += 7;
+            yPosition += 6;
             doc.text(`Position: ${exp.position}`, 20, yPosition);
             yPosition += 7;
 
@@ -41,7 +89,7 @@ function CVDisplay({ generalInfo, education, experience, onEdit }) {
                 170
             );
             doc.text(responsibilities, 20, yPosition);
-            yPosition += responsibilities.length * 7 + 7;
+            yPosition += responsibilities.length * 6 + 6;
 
             doc.text(`From: ${exp.dateFrom} To: ${exp.dateTo}`, 20, yPosition);
             yPosition += 15;
