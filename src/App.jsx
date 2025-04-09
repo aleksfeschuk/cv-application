@@ -67,42 +67,50 @@ function App() {
   return (
     <div className="app-container">
       <h1>CV Application</h1>
-      <button className="clear-button" onClick={handleClear}>
-        Clear All
-      </button>
-      {(!generalInfo || editingSection === 'general') && (
-        <GeneralInfo 
-          onSubmit={handleGeneralInfoSubmit}
-          initialData={generalInfo}
-        />
-      )}
-      <Education 
-        onSubmit={handleEducationSubmit}
-        initialData={
-          editingSection === 'education' && editingIndex !== null
-            ? education[editingIndex]
-            : null
-        }
-        isEditing={editingSection === 'education'}
-        onAdd={() => handleEditSection('education')}
-      />
-      <Experience 
-        onSubmit={handleExperienceSubmit}
-        initialData={
-          editingSection === 'experience' && editingIndex !== null
-            ? experience[editingIndex]
-            : null
-        } 
-        isEditing={editingSection === 'experience'}
-        onAdd={() => handleEditSection('experience')}
-      />
-      <CVDisplay
-        generalInfo={generalInfo}
-        education={education}
-        experience={experience}
-        onEdit={handleEditSection}
-        onDelete={handleDelete}
-      />
+      <div className="button-group">
+        <button className="clear-button" onClick={handleClear}>
+          Clear Resume
+        </button>
+      </div>
+      <div className="columns">
+        <div className="left-column">
+          {(!generalInfo || editingSection === 'general') && (
+            <GeneralInfo 
+              onSubmit={handleGeneralInfoSubmit}
+              initialData={generalInfo}
+            />
+          )}
+          <Education 
+            onSubmit={handleEducationSubmit}
+            initialData={
+              editingSection === 'education' && editingIndex !== null
+                ? education[editingIndex]
+                : null
+            }
+            isEditing={editingSection === 'education'}
+            onAdd={() => handleEditSection('education')}
+          />
+          <Experience 
+            onSubmit={handleExperienceSubmit}
+            initialData={
+              editingSection === 'experience' && editingIndex !== null
+                ? experience[editingIndex]
+                : null
+            } 
+            isEditing={editingSection === 'experience'}
+            onAdd={() => handleEditSection('experience')}
+          />
+        </div>
+        <div className="right-column">
+            <CVDisplay
+              generalInfo={generalInfo}
+              education={education}
+              experience={experience}
+              onEdit={handleEditSection}
+              onDelete={handleDelete}
+            />
+        </div>
+      </div>
     </div>
   );
 }
