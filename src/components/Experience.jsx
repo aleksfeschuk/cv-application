@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import '../styles/Experience.scss';
 
-function Experience({ onSubmit, initialData, isEditing, onAdd }) {
+function Experience({ onSubmit, onChange, initialData, isEditing, onAdd }) {
     const [experience, setExperience] = useState({
         company: '',
         position: '',
@@ -33,7 +33,11 @@ function Experience({ onSubmit, initialData, isEditing, onAdd }) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setExperience((prev) => ({ ...prev, [name]: value }));
+        setExperience ((prev) => {
+            const updatedExperience = { ...prev, [name]: value};
+            onChange(updatedExperience);
+            return updatedExperience;
+        })
         setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
     };
 

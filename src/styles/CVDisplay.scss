@@ -85,7 +85,32 @@
             }
         }
     }
-}
+
+        .edit-button {
+            padding: 8px 16px;
+            background-color: #f1c40f;
+            color: #2c3e50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background-color 0.3s, transform 0.1s;
+
+            &:hover {
+                background-color: #e1b307;
+                transform: scale(1.05);
+            }
+
+            &:before {
+                content: '✏️';
+                margin-right: 5px;
+            }
+        }
+    }
 
     p {
         text-align: center;
@@ -96,40 +121,45 @@
 
 @media (max-width: 600px) {
     .cv-display {
-      padding: 15px;
+        padding: 15px;
   
-      h2 {
-        font-size: 24px;
-      }
+        h2 {
+            font-size: 24px;
+        }
   
-      .download-button {
-        padding: 8px 16px;
-        font-size: 14px;
-      }
+        .download-button {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
   
-      .cv-section {
-        margin-bottom: 20px;
+        .cv-section {
+            margin-bottom: 20px;
   
         h3 {
-          font-size: 18px;
+            font-size: 18px;
         }
   
         .cv-entry {
-          padding: 10px;
+            padding: 10px;
   
-          p {
-            font-size: 14px;
-          }
+            p {
+                font-size: 14px;
+            }
   
-        .button-group {
-            gap: 8px;
+            .button-group {
+                gap: 8px;
   
-            button {
+                button {
+                    padding: 6px 12px;
+                    font-size: 12px;
+                }
+            }
+        }
+  
+            .edit-button {
                 padding: 6px 12px;
                 font-size: 12px;
             }
         }
-      }
     }
-  }
 }

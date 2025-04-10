@@ -9,7 +9,9 @@ function App() {
   const [generalInfo, setGeneralInfo] = useState(null);
   const [tempGeneralInfo, setTempGeneralInfo] = useState(null);
   const [education, setEducation] = useState([]);
+  const [tempEducation, setTempEducation] = useState(null);
   const [experience, setExperience] = useState([]);
+  const [tempExperience, setTempExperience] = useState(null);
   const [editingSection, setEditingSection] = useState(null);
   const [editingIndex, setEditingIndex] = useState(null);
 
@@ -30,8 +32,13 @@ function App() {
     } else {
       setEducation((prev) => [...prev, data]);
     }
+    setTempEducation(null);
     setEditingSection(null);
     setEditingIndex(null);
+  };
+
+  const handleEducationChange = (data) => {
+    setTempEducation(data);
   };
 
   const handleExperienceSubmit = (data) => {
@@ -42,15 +49,22 @@ function App() {
     } else {
       setExperience((prev) => [...prev, data]);
     }
+    setTempExperience(null);
     setEditingSection(null);
     setEditingIndex(null);
   };
+
+  const handleExperienceChange = (data) => {
+    setTempExperience(data);
+  }
 
   const handleClear = () => {
     setGeneralInfo(null);
     setTempGeneralInfo(null);
     setEducation([]);
+    setTempEducation(null);
     setExperience([]);
+    setTempExperience(null);
     setEditingSection(null);
     setEditingIndex(null);
   }
@@ -89,6 +103,7 @@ function App() {
           )}
           <Education 
             onSubmit={handleEducationSubmit}
+            onChange={handleEducationChange}
             initialData={
               editingSection === 'education' && editingIndex !== null
                 ? education[editingIndex]
@@ -99,6 +114,7 @@ function App() {
           />
           <Experience 
             onSubmit={handleExperienceSubmit}
+            onChange={handleExperienceChange}
             initialData={
               editingSection === 'experience' && editingIndex !== null
                 ? experience[editingIndex]
@@ -111,8 +127,8 @@ function App() {
         <div className="right-column">
             <CVDisplay
               generalInfo={generalInfo || tempGeneralInfo}
-              education={education}
-              experience={experience}
+              education={[...(education || []), ...(tempEducation ? [tempEducation] : [])]}
+              experience={[...(experience || []), ...(tempExperience ? [tempExperience] : [])]}
               onEdit={handleEditSection}
               onDelete={handleDelete}
             />

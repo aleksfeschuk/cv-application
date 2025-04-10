@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import '../styles/Education.scss';
 
-function Education({ onSubmit, initialData, isEditing, onAdd }) {
+function Education({ onSubmit, onChange, initialData, isEditing, onAdd }) {
     const [education, setEducation] = useState({
         school: '',
         study: '',
@@ -19,7 +19,11 @@ function Education({ onSubmit, initialData, isEditing, onAdd }) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setEducation((prev) => ({ ...prev, [name]: value}));
+        setEducation((prev) => {
+            const updatedEducation = { ... prev, [name]: value};
+            onChange(updatedEducation);
+            return updatedEducation;
+        });
         setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
     };
 
