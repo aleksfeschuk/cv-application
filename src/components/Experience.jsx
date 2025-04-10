@@ -103,7 +103,6 @@ function Experience({ onSubmit, onChange, initialData, isEditing, onAdd }) {
 
     return(
         <div className="experience">
-            <h2>Practical Experience</h2>
             {!isEditing ? (
                 <button className="add-button" onClick={onAdd}>
                     Add Experience

@@ -14,10 +14,12 @@ function App() {
   const [tempExperience, setTempExperience] = useState(null);
   const [editingSection, setEditingSection] = useState(null);
   const [editingIndex, setEditingIndex] = useState(null);
+  const [openSection, setOpenSection] = useState(null);
 
   const handleGeneralInfoSubmit = (data) => {
     setGeneralInfo(data);
     setEditingSection(null);
+    setOpenSection(null);
   };
 
   const handleGeneralInfoChange = (data) => {
@@ -35,6 +37,7 @@ function App() {
     setTempEducation(null);
     setEditingSection(null);
     setEditingIndex(null);
+    setOpenSection(null);
   };
 
   const handleEducationChange = (data) => {
@@ -52,6 +55,7 @@ function App() {
     setTempExperience(null);
     setEditingSection(null);
     setEditingIndex(null);
+    setOpenSection(null);
   };
 
   const handleExperienceChange = (data) => {
@@ -67,11 +71,17 @@ function App() {
     setTempExperience(null);
     setEditingSection(null);
     setEditingIndex(null);
+    setOpenSection(null);
   }
 
   const handleEditSection = (section, index = null) => { 
     setEditingSection(section);
     setEditingIndex(index);
+    setOpenSection(section);
+  }
+
+  const toggleSection = (section) => {
+    setOpenSection(openSection === section ? null : section);
   }
 
   const handleDelete = (section, index) => {
@@ -81,8 +91,6 @@ function App() {
       setExperience((prev) => prev.filter((_, i) => i !== index));
     }
   };
-
-
 
   return (
     <div className="app-container">
@@ -94,35 +102,54 @@ function App() {
       </div>
       <div className="columns">
         <div className="left-column">
-          {(!generalInfo || editingSection === 'general') && (
-            <GeneralInfo 
-              onSubmit={handleGeneralInfoSubmit}
-              onChange={handleGeneralInfoChange}
-              initialData={generalInfo}
+          <div className="accordion-section">
+            <h2 onClick={() => toggleSection('general')}>
+              General Information {openSection === 'general' ? '▼' : '▶'}
+            </h2>
+            {openSection === 'general' && (
+              <GeneralInfo 
+                onSubmit={handleGeneralInfoSubmit}
+                onChange={handleGeneralInfoChange}
+                initialData={generalInfo}
+              />
+            )}
+          </div>
+          <div className="accordion-section">
+            <h2 onClick={() => toggleSection('education')}>
+              Educational Experience {openSection === 'education' ? '▼' : '▶'}
+            </h2>
+            {openSection === 'education' && (
+              <Education 
+                onSubmit={handleEducationSubmit}
+                onChange={handleEducationChange}
+                initialData={
+                  editingSection === 'education' && editingIndex !== null
+                   ? education[editingIndex]
+                   : null
+               }
+               isEditing={editingSection === 'education'}
+               onAdd={() => handleEditSection('education')}
+             />
+            )}
+          </div>
+          <div className="accordion-section">
+            <h2 onClick={() => toggleSection('experience')}>
+              Practical Experience {openSection === 'experience' ? '▼' : '▶' }
+            </h2>
+            {openSection === 'experience' && (
+              <Experience 
+                onSubmit={handleExperienceSubmit}
+                onChange={handleExperienceChange}
+                initialData={
+                  editingSection === 'experience' && editingIndex !== null
+                    ? experience[editingIndex]
+                    : null
+                } 
+                isEditing={editingSection === 'experience'}
+                onAdd={() => handleEditSection('experience')}
             />
-          )}
-          <Education 
-            onSubmit={handleEducationSubmit}
-            onChange={handleEducationChange}
-            initialData={
-              editingSection === 'education' && editingIndex !== null
-                ? education[editingIndex]
-                : null
-            }
-            isEditing={editingSection === 'education'}
-            onAdd={() => handleEditSection('education')}
-          />
-          <Experience 
-            onSubmit={handleExperienceSubmit}
-            onChange={handleExperienceChange}
-            initialData={
-              editingSection === 'experience' && editingIndex !== null
-                ? experience[editingIndex]
-                : null
-            } 
-            isEditing={editingSection === 'experience'}
-            onAdd={() => handleEditSection('experience')}
-          />
+            )}
+          </div>
         </div>
         <div className="right-column">
             <CVDisplay

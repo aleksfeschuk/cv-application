@@ -65,7 +65,6 @@ function Education({ onSubmit, onChange, initialData, isEditing, onAdd }) {
 
     return (
         <div className="education">
-            <h2>Educational Experience</h2>
             {!isEditing ? (
                 <button className="add-button" onClick={onAdd}>
                     Add Education
