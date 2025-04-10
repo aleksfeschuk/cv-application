@@ -99,7 +99,10 @@ function CVDisplay({ generalInfo, education, experience, onEdit, onDelete }) {
    };
    return (
     <div className="cv-display">
-        <h2>Your CV</h2>
+        <div className="cv-header">
+            <h2>Your CV</h2>
+        </div>
+        <div className="cv-content">
         <button className='download-button' onClick={generatePDF}>
             Download CV as PDF
         </button>
@@ -158,6 +161,7 @@ function CVDisplay({ generalInfo, education, experience, onEdit, onDelete }) {
         {!generalInfo && education.length === 0 && experience.length === 0 && (
             <p>No data to display. Please fill out the sections above</p>
         )}
+        </div>
     </div>
     );
 }

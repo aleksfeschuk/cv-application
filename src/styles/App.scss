@@ -1,23 +1,25 @@
 .body {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #f5f6fa;
     color: #333;
 }
 
 .app-container {
-    max-width: 120rem;
-    margin: 20px auto;
-    padding: 2rem;
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 3rem;
     background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
 
     h1 {
         text-align: center;
         color: #2c3e50;
         font-weight: 700;
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
+        font-size: 2.5rem;
+        letter-spacing: 1px;
     }
 
     .button-group {
@@ -27,18 +29,19 @@
         margin-bottom: 3rem;
 
         .clear-button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             background-color: #e74c3c;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
             font-weight: 500;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s transform 0.1;
         
             &:hover {
                 background-color: #c0392b;
+                transform: scale(1.05);
             }
         }
     }
@@ -56,62 +59,78 @@
 
         .left-column {
             background-color: #f9f9f9;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         
             .accordion-section {
-                margin-bottom: 15px;
+                margin-bottom: 20px;
 
                 h2 {
                     margin: 0;
-                    padding: 10px 15px;
-                    background-color: #3498db;
+                    padding: 12px 20px;
+                    background-color: #1a3c5e;
                     color: white;
-                    border-radius: 5px;
+                    border-radius: 8px;
                     cursor: pointer;
                     font-weight: 500;
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    transition: background-color 0.3s;
+                    transition: background-color 0.3s transform 0.1s;
 
                     &:hover {
                         background-color: #2980b9;
+                        transform: scale(1.02);
                     }
                 }
             }
         }
 
         .right-column {
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            min-height: 300px; 
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            min-height: 400px; 
         }
     }
 }
 
 @media (max-width: 768px) {
     .app-container {
-        padding: 15px;
-  
+        padding: 20px;
+        margin: 20px;
+        
+        h1 {
+            font-size: 2rem;
+        }
+
         .columns {
             flex-direction: column;
   
         .left-column,
         .right-column {
-            min-width: 100%;
+            min-width: 90%;
             padding: 15px;
         }
-      }
+
+        .left-column {
+            .accordion-section {
+                h2 {
+                    font-size: 1.1rem;
+                    padding: 10px 15px;
+                }
+            }
+        }
+    }
   
         .button-group {
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
   
             .clear-button {
-                padding: 8px 16px;
+                padding: 10px 20px;
                 font-size: 14px;
             }
         }

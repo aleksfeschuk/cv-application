@@ -55,7 +55,6 @@ function GeneralInfo({ onSubmit, onChange, initialData }) {
 
     return (
         <div className="general-info">
-            <h2>General Information</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Full Name:</label>
