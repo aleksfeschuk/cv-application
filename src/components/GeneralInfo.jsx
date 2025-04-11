@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import '../styles/GeneralInfo.scss';
 
 function GeneralInfo({ onSubmit, onChange, initialData }) {
-    const [generalInfo, setGeneralInfo] = useState({ name: '', email: '', phone: '' });
-    const [errors, setErrors] = useState({ name: '', email: '', phone: ''});
+    const [generalInfo, setGeneralInfo] = useState({ name: '', email: '', phone: '', location: '' });
+    const [errors, setErrors] = useState({ name: '', email: '', phone: '', location: ''});
 
     useEffect(() => {
         if(initialData) {
@@ -22,7 +22,7 @@ function GeneralInfo({ onSubmit, onChange, initialData }) {
     };
 
     const validateForm = () => {
-        const newErrors = { name: '', email: '', phone: ''};
+        const newErrors = { name: '', email: '', phone: '', location: ''};
         let isValid = true;
 
         if(!generalInfo.name.trim()) {
@@ -88,6 +88,17 @@ function GeneralInfo({ onSubmit, onChange, initialData }) {
                         placeholder="Enter your phone"
                     />
                     {errors.phone && <span className="error">{errors.phone}</span>}
+                </div>
+                <div>
+                    <label>Location:</label>
+                    <input 
+                        type="tel" 
+                        name="location"
+                        value={generalInfo.location}
+                        onChange={handleChange}
+                        placeholder="Enter your location (e.g., Toronto, ON, Canada)"
+                    />
+                    {errors.location && <span className="error">{errors.location}</span>}
                 </div>
                 <button type="submit">Submit</button>
             </form>

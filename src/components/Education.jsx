@@ -6,14 +6,15 @@ function Education({ onSubmit, onChange, initialData, isEditing, onAdd }) {
         school: '',
         study: '',
         date: '',
+        location: '',
     });
-    const [errors, setErrors] = useState({ school: '', study: '', date: ''});
+    const [errors, setErrors] = useState({ school: '', study: '', date: '', location: ''});
 
     useEffect(() => {
         if (initialData) {
             setEducation(initialData)
         } else {
-            setEducation({school: '', study: '', date: ''});
+            setEducation({school: '', study: '', date: '', location: ''});
         }
     }, [initialData]);
 
@@ -28,7 +29,7 @@ function Education({ onSubmit, onChange, initialData, isEditing, onAdd }) {
     };
 
     const validateForm = () => {
-        const newErrors = { school: '', study: '', date: ''};
+        const newErrors = { school: '', study: '', date: '', location: ''};
         let isValid = true;
 
         if(!education.school.trim()) {
@@ -58,8 +59,8 @@ function Education({ onSubmit, onChange, initialData, isEditing, onAdd }) {
 
 
     const handleCancel = () => {
-        setEducation({ school: '', study: '', date: ''});
-        setErrors({ school: '', study: '', date: ''});
+        setEducation({ school: '', study: '', date: '', location: ''});
+        setErrors({ school: '', study: '', date: '', location: ''});
         onAdd();
     }
 
@@ -71,6 +72,17 @@ function Education({ onSubmit, onChange, initialData, isEditing, onAdd }) {
                 </button>
             ) : (
                 <form onSubmit={handleSubmit}>
+                    <div>
+                        <label>Location:</label>
+                        <input 
+                            type="text" 
+                            name="location"
+                            value={education.location}
+                            onChange={handleChange}
+                            placeholder="Enter location (e.g., Toronto, ON, Canada)"
+                        />
+                        {errors.location && <span className="error">{errors.location}</span>}
+                    </div>
                     <div>
                         <label>School Name:</label>
                         <input 

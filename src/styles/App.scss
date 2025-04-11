@@ -44,6 +44,23 @@
                 transform: scale(1.05);
             }
         }
+
+        .load-example-button {
+            padding: 12px 24px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.1s;
+
+            &:hover {
+                background-color: #218838;
+                transform: scale(1.05);
+            }
+        }
     }
 
     .columns {
@@ -129,7 +146,8 @@
             flex-direction: column;
             gap: 15px;
   
-            .clear-button {
+            .clear-button,
+            .load-example-button {
                 padding: 10px 20px;
                 font-size: 14px;
             }

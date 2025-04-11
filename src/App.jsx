@@ -16,6 +16,46 @@ function App() {
   const [editingIndex, setEditingIndex] = useState(null);
   const [openSection, setOpenSection] = useState(null);
 
+  const exampleResume = {
+    generalInfo: {
+      name: 'Ethan Carter',
+      email: 'ethan.carter@mail.ca',
+      phone: '1 123-456-789',
+      location: 'Toronto, ON, Canada',
+    },  
+    education: [
+      {
+        school: 'University of Toronto',
+        study: 'Bachelor of Science in Computer Science',
+        date: '09/2021 - 05/2025',
+        location: 'Toronto, ON, Canada',
+      },
+    ],
+    experience: [
+      {
+        ompany: 'Shopify',
+        position: 'Software Development Intern',
+        responsibilities:
+          'Developed and tested RESTful APIs for e-commerce platform, collaborated with senior developers to improve checkout performance, and contributed to the implementation of new payment features.',
+        dateFrom: '06/2024',
+        dateTo: '09/2024',
+        location: 'Toronto, ON, Canada',
+      },
+    ],
+  };
+
+  const handleLoadExample = () => {
+    setGeneralInfo(exampleResume.generalInfo);
+    setTempGeneralInfo(null);
+    setEducation(exampleResume.education);
+    setTempEducation(null);
+    setExperience(exampleResume.experience);
+    setTempExperience(null);
+    setEditingSection(null);
+    setEditingIndex(null);
+    setOpenSection(null);
+  };
+
   const handleGeneralInfoSubmit = (data) => {
     setGeneralInfo(data);
     setEditingSection(null);
@@ -98,6 +138,9 @@ function App() {
       <div className="button-group">
         <button className="clear-button" onClick={handleClear}>
           Clear Resume
+        </button>
+        <button className='load-example-button' onClick={handleLoadExample}>
+          Load Example
         </button>
       </div>
       <div className="columns">

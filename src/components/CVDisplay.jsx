@@ -32,7 +32,12 @@ function CVDisplay({ generalInfo, education, experience, onEdit, onDelete }) {
         doc.text(`Email: ${generalInfo.email}`, 20, yPosition);
         yPosition += 6;
         doc.text(`Phone: ${generalInfo.phone}`, 20, yPosition);
-        yPosition += 15;
+        if (generalInfo.location) {
+            doc.text(`Location: ${generalInfo.location}`, 20, yPosition);
+            yPosition += 15;
+        } else {
+            yPosition += 15;
+        }
     }
 
     if (education.length > 0) {
@@ -53,6 +58,10 @@ function CVDisplay({ generalInfo, education, experience, onEdit, onDelete }) {
             doc.setFont('Helvetica', 'normal');
             doc.setFontSize(12);
             doc.setFontSize(51, 51, 51);
+            if (edu.location) {
+                doc.text(`Location: ${edu.location}`, 20, yPosition);
+                yPosition += 6;
+            }
             doc.text(`School: ${edu.school}`, 20, yPosition);
             yPosition += 6;
             doc.text(`Title of study: ${edu.study}`, 20, yPosition);
@@ -79,6 +88,10 @@ function CVDisplay({ generalInfo, education, experience, onEdit, onDelete }) {
             doc.setFont('Helvetica', 'bold');
             doc.setFontSize(12);
             doc.setTextColor(51, 51, 51);
+            if (generalInfo.location) {
+                doc.text(`Location: ${exp.location}`, 20, yPosition);
+                yPosition += 6;
+            }
             doc.text(`Company: ${exp.company}`, 20, yPosition);
             yPosition += 6;
             doc.text(`Position: ${exp.position}`, 20, yPosition);
@@ -112,6 +125,7 @@ function CVDisplay({ generalInfo, education, experience, onEdit, onDelete }) {
                 <p>Name: {generalInfo.name}</p>
                 <p>Email: {generalInfo.email}</p>
                 <p>Phone: {generalInfo.phone}</p>
+                {generalInfo.location && <p>Location: {generalInfo.location}</p>}
                 <button onClick={() => onEdit('general')}>Edit</button>
             </div>
         )}
@@ -120,6 +134,7 @@ function CVDisplay({ generalInfo, education, experience, onEdit, onDelete }) {
                 <h3>Education</h3>
                 {education.map((edu, index) => (
                     <div key={index} className="cv-entry">
+                        {edu.location && <p>Location: {edu.location}</p>}
                         <p>School: {edu.school}</p>
                         <p>Title of Study: {edu.study}</p>
                         <p>Date: {edu.date}</p>
@@ -141,6 +156,7 @@ function CVDisplay({ generalInfo, education, experience, onEdit, onDelete }) {
                 <h3>Experience</h3>
                 {experience.map((exp, index) => (
                     <div key={index} className='cv-entry'>
+                        {exp.location && <p>Location: {exp.location}</p>}
                         <p>Company: {exp.company}</p>
                         <p>Position: {exp.position}</p>
                         <p>Responsibilities: {exp.responsibilities}</p>

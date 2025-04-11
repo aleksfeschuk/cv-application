@@ -14,7 +14,8 @@ function Experience({ onSubmit, onChange, initialData, isEditing, onAdd }) {
         position: '', 
         responsibilities: '',
         dateFrom: '',
-        dateTo: ''
+        dateTo: '',
+        location: '',
     });
 
     useEffect(() => {
@@ -27,6 +28,7 @@ function Experience({ onSubmit, onChange, initialData, isEditing, onAdd }) {
                 responsibilities: '',
                 dateFrom: '',
                 dateTo: '',
+                location: '',
             });
         }
     }, [initialData]);
@@ -48,6 +50,7 @@ function Experience({ onSubmit, onChange, initialData, isEditing, onAdd }) {
             responsibilities: '',
             dateFrom: '',
             dateTo: '',
+            location: '',
         };
         let isValid = true;
 
@@ -71,6 +74,10 @@ function Experience({ onSubmit, onChange, initialData, isEditing, onAdd }) {
             newErrors.dateTo = 'End date is required';
             isValid = false;
         }
+        if (!experience.location.trim()) {
+            newErrors.location = 'Location is required';
+            isValid = false;
+        }
 
         setErrors(newErrors);
         return isValid;
@@ -90,6 +97,7 @@ function Experience({ onSubmit, onChange, initialData, isEditing, onAdd }) {
             responsibilities: '',
             dateFrom: '',
             dateTo: '',
+            location: '',
         });
         setErrors({
             company: '',
@@ -97,6 +105,7 @@ function Experience({ onSubmit, onChange, initialData, isEditing, onAdd }) {
             responsibilities: '',
             dateFrom: '',
             dateTo: '',
+            location: '',
         });
         onAdd();
     }
@@ -109,68 +118,79 @@ function Experience({ onSubmit, onChange, initialData, isEditing, onAdd }) {
                 </button>
             ) : (
                 <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Company Name:</label>
-                    <input 
-                        type="text"
-                        name="company"
-                        value={experience.company}
-                        onChange={handleChange}
-                        placeholder="Enter company name"
-                    />
-                    {errors.company && <span className="error">{errors.company}</span>}
-                </div>
-                <div>
-                    <label>Position Title:</label>
-                    <input 
-                        type="text"
-                        name="position"
-                        value={experience.position}
-                        onChange={handleChange}
-                        placeholder="Enter company title"
-                    />
-                    {errors.position && <span className="error">{errors.position}</span>}
-                </div>
-                <div>
-                    <label>Main Responsibilities:</label>
-                    <textarea 
-                        name="responsibilities" 
-                        value={experience.responsibilities}
-                        onChange={handleChange}
-                        placeholder="Enter main responsibilities"
-                    />
-                    {errors.responsibilities && (
-                        <span className="error">{errors.responsibilities}</span>
-                    )}
-                </div>
-                <div>
-                    <label>Date From:</label>
-                    <input 
-                        type="text"
-                        name="dateFrom"
-                        value={experience.dateFrom}
-                        onChange={handleChange}
-                        placeholder="Enter start date (e.g., 2025-01)"
-                    />{errors.dateFrom && <span className="error">{errors.dateFrom}</span>}
-                </div>
-                <div>
-                    <label>Date To:</label>
-                    <input 
-                        type="text"
-                        name="dateTo"
-                        value={experience.dateTo}
-                        onChange={handleChange}
-                        placeholder="Enter end date(e.g., 2025-01)"
-                    />
-                    {errors.dateTo && <span className="error">{errors.dateTo}</span>}
-                </div>
-                <div className="button-group">
-                    <button type="submit">Submit</button>
-                    <button type="button" className="cancel-button" onClick={handleCancel}>
-                        Cancel
-                    </button>
-                </div>
-            </form>
+                    <div>
+                        <label>Location:</label>
+                        <input 
+                            type="text"
+                            name="location"
+                            value={experience.location}
+                            onChange={handleChange}
+                            placeholder="Enter location (e.g., Toronto, ON, Canada)"
+                        />
+                        {errors.location && <span className="error">{errors.location}</span>}
+                    </div>
+                    <div>
+                        <label>Company Name:</label>
+                        <input 
+                            type="text"
+                            name="company"
+                            value={experience.company}
+                            onChange={handleChange}
+                            placeholder="Enter company name"
+                        />
+                        {errors.company && <span className="error">{errors.company}</span>}
+                    </div>
+                    <div>
+                        <label>Position Title:</label>
+                        <input 
+                            type="text"
+                            name="position"
+                            value={experience.position}
+                            onChange={handleChange}
+                            placeholder="Enter company title"
+                        />
+                        {errors.position && <span className="error">{errors.position}</span>}
+                    </div>
+                    <div>
+                        <label>Main Responsibilities:</label>
+                        <textarea 
+                            name="responsibilities" 
+                            value={experience.responsibilities}
+                            onChange={handleChange}
+                            placeholder="Enter main responsibilities"
+                        />
+                        {errors.responsibilities && (
+                            <span className="error">{errors.responsibilities}</span>
+                        )}
+                    </div>
+                    <div>
+                        <label>Date From:</label>
+                        <input 
+                            type="text"
+                            name="dateFrom"
+                            value={experience.dateFrom}
+                            onChange={handleChange}
+                            placeholder="Enter start date (e.g., 2025-01)"
+                        />{errors.dateFrom && <span className="error">{errors.dateFrom}</span>}
+                    </div>
+                    <div>
+                        <label>Date To:</label>
+                        <input 
+                            type="text"
+                            name="dateTo"
+                            value={experience.dateTo}
+                            onChange={handleChange}
+                            placeholder="Enter end date(e.g., 2025-01)"
+                        />
+                        {errors.dateTo && <span className="error">{errors.dateTo}</span>}
+                    </div>
+                    <div className="button-group">
+                        <button type="submit">Submit</button>
+                        <button type="button" className="cancel-button" onClick={handleCancel}>
+                            Cancel
+                        </button>
+                    </div>
+                </form>
             )}
         </div>
     );
